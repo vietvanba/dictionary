@@ -24,8 +24,8 @@ public class HistoryController {
     public ResponseEntity<?> createSearchHistory(@RequestParam(required = true) String word, HttpServletRequest request) {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
-            String username = webClient.post()
-                    .uri("http://localhost:8080/api/v1/user/get-username")
+            String username = webClient.get()
+                    .uri("https://localhost:8443/api/v1/user/get-username")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class).block();
@@ -40,7 +40,7 @@ public class HistoryController {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
             String username = webClient.get()
-                    .uri("http://localhost:8080/api/v1/user/get-username")
+                    .uri("https://localhost:8443/api/v1/user/get-username")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class).block();

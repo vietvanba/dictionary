@@ -1,8 +1,13 @@
 server:
-  port: 8080
+  port: 8443
+  ssl:
+    key-store: classpath:cert.p12
+    key-store-password: Mkx6d1@667
+    key-store-type: PKCS12
+    key-alias: mykey
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/jwt_security
+    url: jdbc:postgresql://localhost:5432/dictionary
     username: postgres
     password: 1
     driver-class-name: org.postgresql.Driver
