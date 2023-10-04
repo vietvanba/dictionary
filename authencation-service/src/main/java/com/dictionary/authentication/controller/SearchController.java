@@ -1,5 +1,6 @@
 package com.dictionary.authentication.controller;
 
+import com.dictionary.authentication.exception.NotFoundOxford;
 import com.dictionary.authentication.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,8 @@ public class SearchController {
             else
                 return ResponseEntity.ok(searchService.findByWord(word.toLowerCase(), type));
         }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            throw new NotFoundOxford(word);
+
         }
 
     }

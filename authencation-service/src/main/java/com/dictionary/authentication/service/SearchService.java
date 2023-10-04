@@ -1,6 +1,5 @@
 package com.dictionary.authentication.service;
 
-import com.dictionary.authentication.exception.NotFoundOxford;
 import com.dictionary.authentication.payload.SearchResponse;
 import com.dictionary.authentication.repository.SearchRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +12,8 @@ public class SearchService {
     private final OxfordDictionaryService oxfordDictionaryService;
 
     public SearchResponse extractDataFromOxford(String word) {
-        try {
-            return searchRepository.save(oxfordDictionaryService.fetchWordDefinition(word));
-        } catch (Exception e) {
-            throw new NotFoundOxford(word, e);
-        }
+
+        return searchRepository.save(oxfordDictionaryService.fetchWordDefinition(word));
     }
 
     public SearchResponse findByWord(String word) {
