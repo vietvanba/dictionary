@@ -1,5 +1,7 @@
 package com.dictionary.authentication.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,5 +21,11 @@ public class GlobalExceptionHandler {
     public ErrorResponse handlerNotFoundOxford(NotFoundOxford e){
 
         return new ErrorResponse(HttpStatus.NOT_FOUND,e.getMessage());
+    }
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(JwtException.class)
+    public ErrorResponse handlerExpiredJwtException(JwtException e){
+
+        return new ErrorResponse(HttpStatus.FORBIDDEN,e.getMessage());
     }
 }
