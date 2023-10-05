@@ -4,6 +4,7 @@ import Header from "./Header";
 import { post } from "../API";
 import { useNavigate } from "react-router-dom";
 export default function Register() {
+  const authPort = "8443";
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -28,7 +29,7 @@ export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Access form data from formData and perform actions (e.g., API requests)
-    post("/api/v1/auth/register", {
+    post("/api/v1/auth/register", authPort, {
       firstname: formData.firstname,
       lastname: formData.lastname,
       email: formData.email,

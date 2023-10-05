@@ -1,10 +1,11 @@
 import { React, useEffect, useState } from "react";
-import { get } from "../API";
+import { get, postWithToken } from "../API";
 import { loading } from "./Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import CarouselImage from "./CarouselImage";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { checkLogin, getCookie } from "./Cookie";
 export function sense(data) {
   return (
     <>
@@ -47,12 +48,14 @@ export function pronunciation(word, pro, lang) {
   );
 }
 export function DescriptionOfWord(props) {
+  const authPort = "8443";
+  const hisPort = "2096";
   const [json, SetJson] = useState();
   const [flag, SetFlag] = useState(0);
   useEffect(() => {
     SetFlag(0);
     SetJson(null);
-    get("/api/v1/search?word=" + props.word)
+    get("/api/v1/search?word=" + props.word, authPort)
       .then((res) => {
         if (res.status == 200) {
           SetJson(res.data);
@@ -66,7 +69,10 @@ export function DescriptionOfWord(props) {
   return (
     <>
       {json && flag === 0 ? (
-        <div className="w-full max-w-4xl mx-auto mt-4 font-sans">
+        <div
+          className="w-full max-w-4xl mx-auto mt-4 font-sans overflow-y-auto rounded-lg shadow-lg px-3 "
+          style={{ "max-height": "80vh" }}
+        >
           <div className="relative">
             <div className="items-end">
               <h1 className="flex-none text-4xl font-medium text-blue-600">

@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Link, NavLink, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
-import { HomePage } from "./components/HomePage";
-import { Word } from "./components/Word";
+import HomePage from "./components/HomePage";
+import Word from "./components/Word";
 function App() {
   return (
     <BrowserRouter>
