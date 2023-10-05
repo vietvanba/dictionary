@@ -42,7 +42,8 @@ function History(props) {
             {listHistory.map((history) => (
               <li
                 key={history.id}
-                className="flex justify-between gap-x-6 py-5"
+                className="flex justify-between gap-x-6 py-5 cursor-pointer "
+                onClick={() => navigate("/search/" + history.word)}
               >
                 <div className="flex min-w-0 gap-x-4">
                   <div className="min-w-0 flex-auto">
