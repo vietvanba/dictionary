@@ -4,7 +4,7 @@ server:
     key-store-password: Mkx6d1@667
     key-store: classpath:keystore.p12
     keyStoreType: PKCS12
-  port: 2096
+  port: 8082
 spring:
   data:
     mongodb:

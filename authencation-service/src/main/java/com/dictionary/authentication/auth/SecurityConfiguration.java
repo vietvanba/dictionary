@@ -23,8 +23,8 @@ import static com.dictionary.authentication.entity.Role.*;
 @EnableMethodSecurity
 public class SecurityConfiguration {
     private static final String[] WHITE_LIST_URL = {"/api/v1/auth/register",
-            "/api/v1/auth/authenticate",
-            "/api/v1/auth/refresh-token",
+            "/auth-service/api/v1/auth/authenticate",
+            "/auth-service/api/v1/auth/refresh-token",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -35,7 +35,7 @@ public class SecurityConfiguration {
             "/swagger-ui/**",
             "/webjars/**",
             "/swagger-ui.html",
-            "/api/v1/search"};
+            "/auth-service/api/v1/search"};
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout ->
-                        logout.logoutUrl("/api/v1/auth/logout")
+                        logout.logoutUrl("/auth-service/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
                 )

@@ -1,0 +1,19 @@
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:cert.p12
+    key-store-password: Mkx6d1@667
+    key-store-type: PKCS12
+    key-alias: mykey
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: authentication-service
+          uri: https://localhost:8081/
+          predicates:
+            - Path= /auth-service/**
+        - id: history-service
+          uri: https://localhost:8082/
+          predicates:
+            - Path= /history-service/**
