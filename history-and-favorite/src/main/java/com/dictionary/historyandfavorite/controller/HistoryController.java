@@ -25,7 +25,7 @@ public class HistoryController {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
             String username = webClient.get()
-                    .uri("https://localhost:8081/auth-service/api/v1/user/get-username")
+                    .uri("http://localhost:8081/auth-service/api/v1/user/get-username")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class).block();
@@ -40,7 +40,7 @@ public class HistoryController {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
             String username = webClient.get()
-                    .uri("https://localhost:8081/auth-service/api/v1/user/get-username")
+                    .uri("http://localhost:8081/auth-service/api/v1/user/get-username")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class).block();

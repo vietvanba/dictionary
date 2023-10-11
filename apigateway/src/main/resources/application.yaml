@@ -10,10 +10,10 @@ spring:
     gateway:
       routes:
         - id: authentication-service
-          uri: https://localhost:8081/
+          uri: http://localhost:8081/
           predicates:
             - Path= /auth-service/**
         - id: history-service
-          uri: https://localhost:8082/
+          uri: http://localhost:8082/
           predicates:
             - Path= /history-service/**

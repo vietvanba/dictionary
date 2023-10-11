@@ -1,10 +1,10 @@
 server:
-  ssl:
-    keyAlias: history
-    key-store-password: Mkx6d1@667
-    key-store: classpath:keystore.p12
-    keyStoreType: PKCS12
-  port: 8082
+#  ssl:
+#    keyAlias: history
+#    key-store-password: Mkx6d1@667
+#    key-store: classpath:keystore.p12
+#    keyStoreType: PKCS12
+  port: '8082'
 spring:
   data:
     mongodb:
