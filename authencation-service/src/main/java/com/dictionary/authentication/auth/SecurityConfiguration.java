@@ -22,7 +22,7 @@ import static com.dictionary.authentication.entity.Role.*;
 @RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfiguration {
-    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/register",
+    private static final String[] WHITE_LIST_URL = {"/auth-service/api/v1/auth/register",
             "/auth-service/api/v1/auth/authenticate",
             "/auth-service/api/v1/auth/refresh-token",
             "/v2/api-docs",
