@@ -48,14 +48,12 @@ export function pronunciation(word, pro, lang) {
   );
 }
 export function DescriptionOfWord(props) {
-  const authPort = "8443";
-  const hisPort = "2096";
   const [json, SetJson] = useState();
   const [flag, SetFlag] = useState(0);
   useEffect(() => {
     SetFlag(0);
     SetJson(null);
-    get("/api/v1/search?word=" + props.word, authPort)
+    get("/auth-service/api/v1/search?word=" + props.word)
       .then((res) => {
         if (res.status == 200) {
           SetJson(res.data);

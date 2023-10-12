@@ -6,22 +6,19 @@ import { get, getWithToken, postWithToken } from "../API";
 import TimeAgo from "../container/TimeAgo";
 import Greeting from "../container/Greeting";
 function History(props) {
-  const hisPort = "2096";
   const [listHistory, setListHistory] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     if (checkLogin()) {
       if (props.word !== undefined) {
         postWithToken(
-          "/api/v1/history?word=" + props.word,
-          hisPort,
+          "/history-service/api/v1/history?word=" + props.word,
           null,
           JSON.parse(getCookie("user")).access_token
         );
       }
       getWithToken(
-        "/api/v1/history",
-        hisPort,
+        "/history-service/api/v1/history",
         JSON.parse(getCookie("user")).access_token
       ).then((res) => {
         if (res.status === 200) {

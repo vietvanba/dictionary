@@ -4,7 +4,6 @@ import Header from "./Header";
 import { post } from "../API";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
-  const authPort = "8443";
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -26,7 +25,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Access form data from formData and perform actions (e.g., API requests)
-    post("/api/v1/auth/authenticate", authPort, {
+    post("/auth-service/api/v1/auth/authenticate", authPort, {
       email: formData.email,
       password: formData.password,
     })
