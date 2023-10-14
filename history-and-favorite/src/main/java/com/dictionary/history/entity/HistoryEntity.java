@@ -1,4 +1,4 @@
-package com.dictionary.historyandfavorite.entity;
+package com.dictionary.history.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.dictionary.historyandfavorite.config;
+package com.dictionary.history.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

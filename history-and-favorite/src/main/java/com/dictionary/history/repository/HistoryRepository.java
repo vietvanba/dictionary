@@ -1,6 +1,6 @@
-package com.dictionary.historyandfavorite.repository;
+package com.dictionary.history.repository;
 
-import com.dictionary.historyandfavorite.entity.HistoryEntity;
+import com.dictionary.history.entity.HistoryEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

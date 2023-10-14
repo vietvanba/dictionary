@@ -1,7 +1,7 @@
-package com.dictionary.historyandfavorite.controller;
+package com.dictionary.history.controller;
 
-import com.dictionary.historyandfavorite.entity.HistoryEntity;
-import com.dictionary.historyandfavorite.service.HistoryService;
+import com.dictionary.history.entity.HistoryEntity;
+import com.dictionary.history.service.HistoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

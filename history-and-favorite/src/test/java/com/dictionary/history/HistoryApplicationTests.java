@@ -1,10 +1,10 @@
-package com.dictionary.historyandfavorite;
+package com.dictionary.history;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HistoryandfavoriteApplicationTests {
+class HistoryApplicationTests {
 
 	@Test
 	void contextLoads() {

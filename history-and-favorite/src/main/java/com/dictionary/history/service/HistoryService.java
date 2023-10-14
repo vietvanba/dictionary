@@ -1,7 +1,7 @@
-package com.dictionary.historyandfavorite.service;
+package com.dictionary.history.service;
 
-import com.dictionary.historyandfavorite.entity.HistoryEntity;
-import com.dictionary.historyandfavorite.repository.HistoryRepository;
+import com.dictionary.history.entity.HistoryEntity;
+import com.dictionary.history.repository.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
