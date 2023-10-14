@@ -28,7 +28,7 @@ export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Access form data from formData and perform actions (e.g., API requests)
-    post("/api/v1/auth/register", {
+    post("/auth-service/api/v1/auth/register", {
       firstname: formData.firstname,
       lastname: formData.lastname,
       email: formData.email,

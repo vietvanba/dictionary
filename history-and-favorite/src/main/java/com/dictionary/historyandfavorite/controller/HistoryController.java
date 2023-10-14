@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Comparator;
 
 @RestController
-@RequestMapping("api/v1/history")
+@RequestMapping("/history-service/api/v1/history")
 @CrossOrigin
 public class HistoryController {
     @Autowired
@@ -24,8 +24,8 @@ public class HistoryController {
     public ResponseEntity<?> createSearchHistory(@RequestParam(required = true) String word, HttpServletRequest request) {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
-            String username = webClient.post()
-                    .uri("http://localhost:8080/api/v1/user/get-username")
+            String username = webClient.get()
+                    .uri("http://localhost:8081/auth-service/api/v1/user/get-username")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class).block();
@@ -40,7 +40,7 @@ public class HistoryController {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
             String username = webClient.get()
-                    .uri("http://localhost:8080/api/v1/user/get-username")
+                    .uri("http://localhost:8081/auth-service/api/v1/user/get-username")
                     .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class).block();

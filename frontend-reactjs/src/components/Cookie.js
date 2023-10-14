@@ -21,10 +21,8 @@ export function clearCookie(name) {
 export function checkLogin() {
   const cookie = getCookie("user");
   if (cookie != null) {
-    console.log("true");
     return true;
   } else {
-    console.log("false");
     return false;
   }
 }

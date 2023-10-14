@@ -56,7 +56,13 @@ public class OxfordDictionaryService {
     }
 
     public SearchResponse fetchWordDefinition(String word) {
-        List<String> images = images(word);
+        List<String> images;
+        try{
+            images= images(word);
+        }catch (Exception e)
+        {
+            images=new ArrayList<>();
+        }
         String url = "http://www.oxfordlearnersdictionaries.com/definition/english/" + word;
         try {
             Document document = Jsoup.connect(url).userAgent("Mozilla/5.0").get();

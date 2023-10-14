@@ -1,6 +1,7 @@
 package com.dictionary.authentication.auth;
 
 import com.dictionary.authentication.repository.TokenRepository;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,7 +44,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(jwt);
+        try {
+            userEmail = jwtService.extractUsername(jwt);
+        }catch (Exception e)
+        {
+            throw new JwtException(e.getMessage());
+        }
+
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             var isTokenValid = tokenRepository.findByToken(jwt)
