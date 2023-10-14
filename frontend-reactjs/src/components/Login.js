@@ -25,7 +25,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Access form data from formData and perform actions (e.g., API requests)
-    post("/auth-service/api/v1/auth/authenticate", authPort, {
+    post("/auth-service/api/v1/auth/authenticate", {
       email: formData.email,
       password: formData.password,
     })
