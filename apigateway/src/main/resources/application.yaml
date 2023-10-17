@@ -5,7 +5,12 @@ server:
     key-store-password: Mkx6d1@667
     key-store-type: PKCS12
     key-alias: mykey
+security:
+  basic:
+    enabled: false
 spring:
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     gateway:
       default-filters:
@@ -20,8 +25,45 @@ spring:
         - id: authentication-service
           uri: http://localhost:8081/
           predicates:
-            - Path= /auth-service/**
+            - Path= /api/v1/auth/**
+          filters:
+            - AuthenticationFilter
         - id: history-service
           uri: http://localhost:8082/
           predicates:
-            - Path= /history-service/**
+            - Path= /api/v1/history/**
+          filters:
+            - AuthenticationFilter
+        - id: search-service
+          uri: http://localhost:8083/
+          predicates:
+            - Path= /api/v1/search/**
+          filters:
+            - AuthenticationFilter
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dictionary
+    username: postgres
+    password: 1
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: API-GATEWAY
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/

@@ -1,0 +1,17 @@
+server:
+  port: 8083
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+    username: elastic
+    password: Mkx6d1@667
+  application:
+    name: SEARCH-SERVICE
+pixabay:
+  api: https://api.pexels.com/v1/search?query=
+  key: r7Dcbc9pPanI7UmwxvMngcFNLqX0XgECNQJa95ybJD2qmzHm8Ldrh3my
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
