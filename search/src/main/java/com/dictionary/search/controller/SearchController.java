@@ -5,6 +5,7 @@ import com.dictionary.search.exception.NotFoundOxford;
 import com.dictionary.search.service.SearchService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,6 +17,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequestMapping("/api/v1/search")
 @CrossOrigin
 public class SearchController {
+    @Value("${application.history-endpoint}")
+    private String hisEndpoint;
     @Autowired
     SearchService searchService;
     @Autowired
@@ -26,16 +29,12 @@ public class SearchController {
             String token = request.getHeader(HttpHeaders.AUTHORIZATION);
             if(token!=null)
             {
-                HttpStatusCode status = webClient.post()
-                        .uri("http://localhost:8082/api/v1/history?word="+word)
+                webClient.post()
+                        .uri(hisEndpoint+"?word="+word)
                         .header("Authorization", token)
                         .exchange()
                         .block()
                         .statusCode();
-                if(status.equals(HttpStatus.OK))
-                {
-                    return ResponseEntity.ok(searchService.findByWord(word.toLowerCase()));
-                }
             }
             return ResponseEntity.ok(searchService.findByWord(word.toLowerCase()));
         } catch (Exception e) {

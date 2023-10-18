@@ -10,7 +10,8 @@ spring:
 pixabay:
   api: https://api.pexels.com/v1/search?query=
   key: r7Dcbc9pPanI7UmwxvMngcFNLqX0XgECNQJa95ybJD2qmzHm8Ldrh3my
-
+application:
+  history-endpoint: http://localhost:8082/api/v1/history
 eureka:
   client:
     service-url:
