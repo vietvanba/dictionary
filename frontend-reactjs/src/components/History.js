@@ -10,15 +10,8 @@ function History(props) {
   const navigate = useNavigate();
   useEffect(() => {
     if (checkLogin()) {
-      if (props.word !== undefined) {
-        postWithToken(
-          "/history-service/api/v1/history?word=" + props.word,
-          null,
-          JSON.parse(getCookie("user")).access_token
-        );
-      }
       getWithToken(
-        "/history-service/api/v1/history",
+        "/api/v1/history",
         JSON.parse(getCookie("user")).access_token
       ).then((res) => {
         if (res.status === 200) {

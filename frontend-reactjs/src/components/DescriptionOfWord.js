@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { get, postWithToken } from "../API";
+import { getWithToken } from "../API";
 import { loading } from "./Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons";
@@ -53,7 +53,10 @@ export function DescriptionOfWord(props) {
   useEffect(() => {
     SetFlag(0);
     SetJson(null);
-    get("/auth-service/api/v1/search?word=" + props.word)
+    getWithToken(
+      "/api/v1/search?word=" + props.word,
+      JSON.parse(getCookie("token"))
+    )
       .then((res) => {
         if (res.status == 200) {
           SetJson(res.data);
