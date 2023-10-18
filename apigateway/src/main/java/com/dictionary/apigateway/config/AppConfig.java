@@ -1,6 +1,7 @@
 package com.dictionary.apigateway.config;
 
 import com.dictionary.apigateway.Repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,11 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+
+import org.springframework.web.cors.reactive.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.server.ServerWebExchange;
 
 @Configuration
 @EnableWebSecurity
@@ -35,5 +41,19 @@ public class AppConfig {
 
         return http.build();
 
+    }
+    @Bean
+    public CorsWebFilter corsWebFilter() {
+        CorsConfigurationSource source= new CorsConfigurationSource() {
+            @Override
+            public CorsConfiguration getCorsConfiguration(ServerWebExchange exchange) {
+                CorsConfiguration corsConfig = new CorsConfiguration();
+                corsConfig.addAllowedOrigin("*"); // You can specify specific origins instead of "*"
+                corsConfig.addAllowedHeader("*");
+                corsConfig.addAllowedMethod("*");
+                return corsConfig;
+            }
+        };
+        return new CorsWebFilter(source);
     }
 }

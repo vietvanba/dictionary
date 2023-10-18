@@ -27,18 +27,27 @@ spring:
           predicates:
             - Path= /api/v1/auth/**
           filters:
+            - AddResponseHeader=Access-Control-Allow-Origin, *
+            - AddResponseHeader=Access-Control-Allow-Methods, *
+            - AddResponseHeader=Access-Control-Allow-Headers, *
             - AuthenticationFilter
         - id: history-service
           uri: http://localhost:8082/
           predicates:
             - Path= /api/v1/history/**
           filters:
+            - AddResponseHeader=Access-Control-Allow-Origin, *
+            - AddResponseHeader=Access-Control-Allow-Methods, *
+            - AddResponseHeader=Access-Control-Allow-Headers, *
             - AuthenticationFilter
         - id: search-service
           uri: http://localhost:8083/
           predicates:
             - Path= /api/v1/search/**
           filters:
+            - AddResponseHeader=Access-Control-Allow-Origin, *
+            - AddResponseHeader=Access-Control-Allow-Methods, *
+            - AddResponseHeader=Access-Control-Allow-Headers, *
             - AuthenticationFilter
   datasource:
     url: jdbc:postgresql://localhost:5432/dictionary
