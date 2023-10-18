@@ -11,7 +11,7 @@
     <groupId>com.dictionary</groupId>
     <artifactId>history</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>historyandfavorite</name>
+    <name>history</name>
     <description>History and favorite service</description>
     <properties>
         <java.version>17</java.version>
