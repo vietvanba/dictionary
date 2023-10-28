@@ -28,7 +28,7 @@ export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Access form data from formData and perform actions (e.g., API requests)
-    post("/auth-service/api/v1/auth/register", {
+    post("/api/v1/auth/register", {
       firstname: formData.firstname,
       lastname: formData.lastname,
       email: formData.email,
@@ -37,6 +37,7 @@ export default function Register() {
       .then((res) => {
         if (res.status == 200) {
           setCookie("user", JSON.stringify(res.data), 7);
+          setCookie("token", JSON.stringify(res.data.access_token), 7);
           navigate("/");
         }
       })
