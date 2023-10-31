@@ -1,9 +1,6 @@
 package com.dictionary.authentication.exception;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,15 +8,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handlerSecurity(Exception e){
-
-        return new ErrorResponse(HttpStatus.FORBIDDEN,e.getMessage());
+    @ExceptionHandler(UsernameOrPasswordNotCorrectException.class)
+    public ErrorResponse handlerUsernameOrPasswordNotCorrectException(UsernameOrPasswordNotCorrectException e) {
+        return new ErrorResponse(HttpStatus.FORBIDDEN, e.getMessage());
     }
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(JwtException.class)
-    public ErrorResponse handlerExpiredJwtException(JwtException e){
 
-        return new ErrorResponse(HttpStatus.FORBIDDEN,e.getMessage());
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CanNotSaveEntityException.class)
+    public ErrorResponse handlerCanNotSaveEntityException(CanNotSaveEntityException e) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(UsernameExistException.class)
+    public ErrorResponse handlerUsernameExistException(UsernameExistException e) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 }
