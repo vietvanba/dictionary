@@ -3,6 +3,7 @@ import { setCookie, getCookie, checkLogin } from "./Cookie";
 import Header from "./Header";
 import { post } from "../API";
 import { useNavigate } from "react-router-dom";
+import { toast,ToastContainer  } from 'react-toastify';
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ export default function Login() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        toast.error(error.response.data.error);
       });
   };
   return (
@@ -124,6 +125,7 @@ export default function Login() {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }

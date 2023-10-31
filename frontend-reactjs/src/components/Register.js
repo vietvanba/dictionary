@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setCookie, getCookie, checkLogin } from "./Cookie";
+import { toast,ToastContainer  } from 'react-toastify';
 import Header from "./Header";
 import { post } from "../API";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +43,7 @@ export default function Register() {
         }
       })
       .catch((error) => {
-        console.error(error);
+        toast.error(error.response.data.error);
       });
   };
   return (
@@ -181,6 +182,7 @@ export default function Register() {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
