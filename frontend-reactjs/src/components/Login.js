@@ -10,6 +10,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const sleep = ms =>
+  new Promise(resolve => setTimeout(resolve, ms));
   const [storedUser, setStoredUser] = useState();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -34,7 +36,11 @@ export default function Login() {
         if (res.status == 200) {
           setCookie("user", JSON.stringify(res.data), 7);
           setCookie("token", JSON.stringify(res.data.access_token), 7);
-          navigate("/");
+          toast.success("Login success")
+          sleep(2000).then(() => {
+            navigate("/");
+          });
+          
         }
       })
       .catch((error) => {
