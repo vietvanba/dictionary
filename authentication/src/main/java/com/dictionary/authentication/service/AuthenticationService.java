@@ -5,6 +5,8 @@ import com.dictionary.authentication.entity.Role;
 import com.dictionary.authentication.entity.Token;
 import com.dictionary.authentication.entity.TokenType;
 import com.dictionary.authentication.entity.User;
+import com.dictionary.authentication.exception.CanNotSaveEntityException;
+import com.dictionary.authentication.exception.UsernameExistException;
 import com.dictionary.authentication.payload.AuthenticationRequest;
 import com.dictionary.authentication.payload.AuthenticationResponse;
 import com.dictionary.authentication.payload.RegisterRequest;
@@ -41,28 +43,41 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole() == null ? Role.USER : request.getRole())
                 .build();
-        var savedUser = repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
-        return AuthenticationResponse.builder()
-                .userId(user.getId())
-                .firstName(user.getFirstname())
-                .lastName(user.getLastname())
-                .email(user.getEmail())
-                .role(user.getRole().name())
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .build();
+        if(repository.existsByEmail(user.getEmail())) throw new UsernameExistException(user.getEmail()+" existed. Please try another email or try to retrieve your password");
+        try {
+            var savedUser = repository.save(user);
+            var jwtToken = jwtService.generateToken(user);
+            var refreshToken = jwtService.generateRefreshToken(user);
+            saveUserToken(savedUser, jwtToken);
+            return AuthenticationResponse.builder()
+                    .userId(user.getId())
+                    .firstName(user.getFirstname())
+                    .lastName(user.getLastname())
+                    .email(user.getEmail())
+                    .role(user.getRole().name())
+                    .accessToken(jwtToken)
+                    .refreshToken(refreshToken)
+                    .build();
+        }catch (Exception e)
+        {
+            throw new CanNotSaveEntityException(e.getMessage());
+        }
+
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        }catch (Exception e)
+        {
+            throw new UsernameNotFoundException("Username or password not correct. Please try again!");
+        }
+
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
