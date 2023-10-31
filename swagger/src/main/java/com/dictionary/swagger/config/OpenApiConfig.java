@@ -1,4 +1,4 @@
-package com.dictionary.authentication.config;
+package com.dictionary.swagger.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Local ENV",
-                        url = "http://localhost:8080"
+                        url = "http://localhost:8443"
                 ),
                 @Server(
                         description = "PROD ENV",
