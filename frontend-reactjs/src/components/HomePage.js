@@ -1,6 +1,7 @@
 import Header from "./Header";
 import History from "./History";
 import SearchDictionary from "./SearchDic";
+import AboutProject from "./AboutProject";
 
 function HomePage() {
   return (
@@ -12,6 +13,7 @@ function HomePage() {
         </div>
         <div className="col-span-4">
           <SearchDictionary />
+          <AboutProject />
         </div>
         <div className="col-span-2"></div>
       </div>

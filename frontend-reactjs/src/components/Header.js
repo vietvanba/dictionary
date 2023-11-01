@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { clearCookie, getCookie, checkLogin } from "./Cookie";
-import { toast, ToastContainer  } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -62,8 +62,7 @@ function classNames(...classes) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const sleep = ms =>
-  new Promise(resolve => setTimeout(resolve, ms));
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   return (
     <header className="bg-white">
       <nav
@@ -191,11 +190,10 @@ export default function Header() {
                 onClick={() => {
                   clearCookie("user");
                   clearCookie("token");
-                  toast.success("Log out success")
+                  toast.success("Log out success");
                   sleep(2000).then(() => {
                     window.location.reload();
                   });
-                  
                 }}
               >
                 <FontAwesomeIcon icon={faSignOut} />
@@ -303,7 +301,7 @@ export default function Header() {
                       onClick={() => {
                         clearCookie("user");
                         clearCookie("token");
-                        toast.success("Log out success")
+                        toast.success("Log out success");
                         sleep(2000).then(() => {
                           window.location.reload();
                         });
