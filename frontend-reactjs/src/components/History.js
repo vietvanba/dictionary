@@ -23,7 +23,7 @@ function History(props) {
   }, [props.word]);
   return (
     <div>
-      <div className="text-center text-xl font-bold text-xl mb-2">
+      <div className="text-center text-xl font-bold text-xl pb-4">
         Search history
       </div>
       {checkLogin() ? (

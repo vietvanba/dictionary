@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { clearCookie, getCookie, checkLogin } from "./Cookie";
+import { toast, ToastContainer } from "react-toastify";
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -61,7 +62,7 @@ function classNames(...classes) {
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   return (
     <header className="bg-white">
       <nav
@@ -70,18 +71,18 @@ export default function Header() {
       >
         <div className="flex lg:flex-1 items-center justify-center">
           <a href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Gachi Korean</span>
+            <span className="sr-only">Viet Dictionary</span>
             <img
               className="h-8 w-auto"
               src={logo}
-              alt="Gachi Korean - Học tiếng Hàn cùng Meow"
+              alt="Viet Dictionary - Học tiếng Anh cùng Meow"
             />
           </a>
           <a
             href="/"
             className="text-sm font-semibold leading-6 text-gray-900 ml-3"
           >
-            Gachi Korean
+            Viet Dictionary
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -189,7 +190,10 @@ export default function Header() {
                 onClick={() => {
                   clearCookie("user");
                   clearCookie("token");
-                  window.location.reload();
+                  toast.success("Log out success");
+                  sleep(2000).then(() => {
+                    window.location.reload();
+                  });
                 }}
               >
                 <FontAwesomeIcon icon={faSignOut} />
@@ -208,14 +212,14 @@ export default function Header() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Gachi Korean</span>
+              <span className="sr-only">Viet Dictionary</span>
               <img className="h-8 w-auto" src={logo} alt="" />
             </a>
             <a
               href="/"
               className="text-sm font-semibold leading-6 text-gray-900 ml-3"
             >
-              Gachi Korean
+              Viet Dictionary
             </a>
             <button
               type="button"
@@ -297,7 +301,10 @@ export default function Header() {
                       onClick={() => {
                         clearCookie("user");
                         clearCookie("token");
-                        window.location.reload();
+                        toast.success("Log out success");
+                        sleep(2000).then(() => {
+                          window.location.reload();
+                        });
                       }}
                     >
                       <FontAwesomeIcon icon={faSignOut} />
@@ -309,6 +316,7 @@ export default function Header() {
           </div>
         </Dialog.Panel>
       </Dialog>
+      <ToastContainer />
     </header>
   );
 }

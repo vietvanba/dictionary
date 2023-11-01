@@ -7,6 +7,7 @@ import com.dictionary.authentication.entity.TokenType;
 import com.dictionary.authentication.entity.User;
 import com.dictionary.authentication.exception.CanNotSaveEntityException;
 import com.dictionary.authentication.exception.UsernameExistException;
+import com.dictionary.authentication.exception.UsernameOrPasswordNotCorrectException;
 import com.dictionary.authentication.payload.AuthenticationRequest;
 import com.dictionary.authentication.payload.AuthenticationResponse;
 import com.dictionary.authentication.payload.RegisterRequest;
@@ -43,7 +44,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole() == null ? Role.USER : request.getRole())
                 .build();
-        if(repository.existsByEmail(user.getEmail())) throw new UsernameExistException(user.getEmail()+" existed. Please try another email or try to retrieve your password");
+        if(repository.existsByEmail(user.getEmail())) throw new UsernameExistException(user.getEmail()+" existed. \nPlease try another email or try to retrieve your password");
         try {
             var savedUser = repository.save(user);
             var jwtToken = jwtService.generateToken(user);
@@ -75,7 +76,7 @@ public class AuthenticationService {
             );
         }catch (Exception e)
         {
-            throw new UsernameNotFoundException("Username or password not correct. Please try again!");
+            throw new UsernameOrPasswordNotCorrectException("Username or password not correct. Please try again!");
         }
 
         var user = repository.findByEmail(request.getEmail())

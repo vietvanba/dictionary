@@ -3,12 +3,14 @@ import { setCookie, getCookie, checkLogin } from "./Cookie";
 import Header from "./Header";
 import { post } from "../API";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const [storedUser, setStoredUser] = useState();
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,11 +35,14 @@ export default function Login() {
         if (res.status == 200) {
           setCookie("user", JSON.stringify(res.data), 7);
           setCookie("token", JSON.stringify(res.data.access_token), 7);
-          navigate("/");
+          toast.success("Login success");
+          sleep(2000).then(() => {
+            navigate("/");
+          });
         }
       })
       .catch((error) => {
-        console.error(error);
+        toast.error(error.response.data.error);
       });
   };
   return (
@@ -124,6 +129,7 @@ export default function Login() {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
