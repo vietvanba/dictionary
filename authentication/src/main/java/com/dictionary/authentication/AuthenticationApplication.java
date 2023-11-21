@@ -4,6 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+//import org.springframework.boot.CommandLineRunner;
+//import org.springframework.context.annotation.Bean;
+//import com.dictionary.authentication.service.AuthenticationService;
+//import static com.dictionary.authentication.entity.Role.ADMIN;
+//import static com.dictionary.authentication.entity.Role.MANAGER;
+//import com.dictionary.authentication.payload.RegisterRequest;
 
 @SpringBootApplication
 @EnableDiscoveryClient
