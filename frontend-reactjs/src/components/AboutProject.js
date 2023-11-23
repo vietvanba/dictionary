@@ -2,6 +2,7 @@ import React from "react";
 import githubLogo from "../logo/githublogo.png";
 import skypeLogo from "../logo/skypeLogo.svg";
 import email from "../logo/email.png";
+import "./aboutProject.scss";
 function AboutProject() {
   return (
     <>
@@ -23,7 +24,7 @@ function AboutProject() {
             commercial purposes.
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 w-full pt-2">
+        <div className="contact grid grid-cols-3 gap-4 w-full pt-2">
           <div className="flex justify-center items-center">
             <img className="w-5" src={githubLogo}></img>
             <a className="pl-2" href="https://github.com/vietvanba/dictionary">

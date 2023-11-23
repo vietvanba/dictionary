@@ -11,7 +11,9 @@ function Word() {
       <Header />
       <div className="grid grid-cols-8 gap-12">
         <div className="col-span-2 pl-12 pt-12">
-          <History word={word} />
+          <div className="history">
+            <History word={word} />
+          </div>
         </div>
         <div className="col-span-4">
           <SearchDictionary />
