@@ -1,0 +1,7 @@
+@import "../styles/responsive.scss";
+
+.contact {
+  @include lg {
+    display: none;
+  }
+}
