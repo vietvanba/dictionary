@@ -1,0 +1,54 @@
+@import "./variables.scss";
+@import "./responsive.scss";
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  height: 100%;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.main {
+  font-family: ui-sans-serif, system-ui, "Segoe UI", "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: $main-bg;
+  color: $main-color;
+  height: 100%;
+}
+.container {
+  display: flex;
+  margin-top: 30px;
+  height: 80%;
+}
+.leftContainer {
+  width: 25%;
+  height: 80%;
+  padding: 5px 20px;
+  @include lg {
+    width: max-content;
+  }
+}
+.rightContainer {
+  width: 25%;
+  height: 80%;
+  padding: 5px 20px;
+  border-right: 2px solid $soft-bg;
+  @include lg {
+    width: max-content;
+  }
+}
+.contentContainer {
+  width: 50%;
+  height: 80%;
+}
