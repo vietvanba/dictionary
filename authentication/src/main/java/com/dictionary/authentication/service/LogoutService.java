@@ -11,20 +11,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LogoutService implements LogoutHandler {
+public class LogoutService {
 
     private final TokenRepository tokenRepository;
 
-    @Override
-    public void logout(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Authentication authentication
+
+    public String logout(
+            HttpServletRequest request
     ) {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return;
+            return "Logout fail. Token invalid!";
         }
         jwt = authHeader.substring(7);
         var storedToken = tokenRepository.findByToken(jwt)
@@ -34,6 +32,8 @@ public class LogoutService implements LogoutHandler {
             storedToken.setRevoked(true);
             tokenRepository.save(storedToken);
             SecurityContextHolder.clearContext();
+            return "Logout succeed!";
         }
+        return "Logout fail. Token invalid!";
     }
 }

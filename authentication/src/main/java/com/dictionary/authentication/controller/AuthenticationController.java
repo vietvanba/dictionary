@@ -6,6 +6,7 @@ import com.dictionary.authentication.payload.AuthenticationResponse;
 import com.dictionary.authentication.payload.RegisterRequest;
 import com.dictionary.authentication.payload.UserDetails;
 import com.dictionary.authentication.service.AuthenticationService;
+import com.dictionary.authentication.service.LogoutService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.io.IOException;
 public class AuthenticationController {
 
     private final AuthenticationService service;
+    private final LogoutService logoutService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -56,6 +58,11 @@ public class AuthenticationController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request)
+    {
+        return ResponseEntity.ok(logoutService.logout(request));
     }
 
 }
