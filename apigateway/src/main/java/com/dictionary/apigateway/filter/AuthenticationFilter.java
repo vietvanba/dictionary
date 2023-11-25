@@ -1,17 +1,22 @@
 package com.dictionary.apigateway.filter;
 
 import com.dictionary.apigateway.Repository.TokenRepository;
+import com.dictionary.apigateway.entity.ErrorResponse;
 import com.dictionary.apigateway.service.JwtService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
@@ -32,6 +37,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
+            ObjectMapper objectMapper = new ObjectMapper();
             if (validator.isSecured.test(exchange.getRequest())) {
                 //header contains token or not
                 final String userEmail;
@@ -65,13 +71,29 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                             );
                         } else {
                             System.out.println("token is expired...!");
-                            throw new RuntimeException("token is expired");
+                            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                            ErrorResponse errorResponse = new ErrorResponse();
+                            errorResponse.setError("jwt expired");
+                            errorResponse.setHttpStatus(HttpStatus.UNAUTHORIZED);
+                            return exchange.getResponse().writeWith(Mono.just(
+                                    exchange.getResponse().bufferFactory().wrap(objectMapper.writeValueAsBytes(errorResponse))
+                            ));
                         }
                     }
 
                 } catch (Exception e) {
                     System.out.println("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                    ErrorResponse errorResponse = new ErrorResponse();
+                    errorResponse.setError("Unauthorized access to the application");
+                    errorResponse.setHttpStatus(HttpStatus.UNAUTHORIZED);
+                    try {
+                        return exchange.getResponse().writeWith(Mono.just(
+                                exchange.getResponse().bufferFactory().wrap(objectMapper.writeValueAsBytes(errorResponse))
+                        ));
+                    } catch (JsonProcessingException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
             return chain.filter(exchange);
