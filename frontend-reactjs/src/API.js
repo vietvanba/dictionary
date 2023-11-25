@@ -1,6 +1,6 @@
 import axios from "axios";
-// const endpoint = "https://vanbaviet.com:8443";
-const endpoint = "https://localhost:8443";
+const endpoint = "https://vanbaviet.com:8443";
+// const endpoint = "https://localhost:8443";
 export async function get(url) {
   return await axios.get(endpoint + url, {
     headers: { "Content-type": "application/json" },
