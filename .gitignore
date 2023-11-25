@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+frontend-reactjs-vite/node_modules/
