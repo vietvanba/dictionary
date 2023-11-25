@@ -34,3 +34,6 @@ build/
 
 
 frontend-reactjs-vite/node_modules/
+
+frontend-reactjs-vite/.vite/
+
