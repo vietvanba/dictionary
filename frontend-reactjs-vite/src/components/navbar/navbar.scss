@@ -1,0 +1,50 @@
+@import "../../styles/variables.scss";
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding-top: 20px;
+  .logo {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: end;
+    width: 20%;
+    img {
+      height: 50px;
+      width: 50px;
+      border-radius: 10px;
+    }
+    .text {
+      padding-left: 10px;
+    }
+  }
+  .items {
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    .item {
+      padding: 15px 20px;
+      &:hover {
+        background: linear-gradient($cyan-200, $blue-300);
+        border-radius: 10px;
+        border: 1px solid lightblue;
+      }
+    }
+  }
+  .login {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 20%;
+    .text {
+      padding: 15px 20px;
+      &:hover {
+        background: linear-gradient($cyan-200, $blue-300);
+        border-radius: 10px;
+        border: 1px solid lightblue;
+      }
+    }
+  }
+}

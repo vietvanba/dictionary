@@ -1,0 +1,26 @@
+@import "../../styles/variables.scss";
+.footer {
+  display: flex;
+  justify-content: center;
+  .items {
+    display: flex;
+    width: 40%;
+    justify-content: space-between;
+    .item {
+      display: flex;
+      padding: 10px;
+      .link {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        img {
+          height: 30px;
+          width: 30px;
+        }
+      }
+      &:hover {
+        background-color: $soft-bg;
+      }
+    }
+  }
+}
