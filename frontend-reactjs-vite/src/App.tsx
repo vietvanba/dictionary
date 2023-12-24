@@ -1,6 +1,7 @@
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/home/Home";
 import "./styles/global.scss";
+import "react-toastify/dist/ReactToastify.css";
 import { Navbar } from "./components/navbar/Navbar";
 import { History } from "./components/history/History";
 import { Footer } from "./components/footer/Footer";

@@ -30,12 +30,14 @@ a {
   display: flex;
   margin-top: 30px;
   height: 80%;
+  justify-content: center;
 }
 .leftContainer {
   width: 25%;
   height: 80%;
   padding: 5px 20px;
   @include lg {
+    display: none;
     width: max-content;
   }
 }
@@ -46,9 +48,18 @@ a {
   border-right: 2px solid $soft-bg;
   @include lg {
     width: max-content;
+    display: none;
   }
 }
 .contentContainer {
   width: 50%;
   height: 80%;
+  @include lg {
+    width: max-content;
+  }
+}
+input {
+  font-family: ui-sans-serif, system-ui, "Segoe UI", "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
 }

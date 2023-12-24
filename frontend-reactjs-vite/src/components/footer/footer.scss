@@ -1,10 +1,12 @@
 @import "../../styles/variables.scss";
+@import "../../styles/responsive.scss";
 .footer {
   display: flex;
   justify-content: center;
   .items {
     display: flex;
-    width: 40%;
+    width: max-content;
+    gap: 100px;
     justify-content: space-between;
     .item {
       display: flex;
@@ -21,6 +23,9 @@
       &:hover {
         background-color: $soft-bg;
       }
+    }
+    @include lg {
+      gap: 0px;
     }
   }
 }
